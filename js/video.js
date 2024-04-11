@@ -34,9 +34,31 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', function () {
 	const video = document.getElementById('player1');
 	const pauseButton = document.getElementById('pause');
+	const volumeDisplay = document.getElementById('volume');
 
 	pauseButton.addEventListener('click', function () {
-		video.pause();
+		if (!video.paused) {
+			video.pause();
+			volumeDisplay.textContent = (video.volume * 100).toFixed(0) + '%';
+		}
+	});
+
+	const playButton = document.getElementById('play');
+	playButton.addEventListener('click', function () {
+		if (video.paused) {
+			video.play();
+			volumeDisplay.textContent = (video.volume * 100).toFixed(0) + '%';
+		} else {
+			video.pause();
+			volumeDisplay.textContent = (video.volume * 100).toFixed(0) + '%';
+		}
+	});
+
+	const volumeSlider = document.getElementById('slider');
+	volumeSlider.addEventListener('input', function () {
+		const volume = volumeSlider.value;
+		video.volume = volume / 100;
+		volumeDisplay.textContent = volume + '%';
 	});
 });
 
