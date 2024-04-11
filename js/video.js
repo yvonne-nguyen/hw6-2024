@@ -6,27 +6,27 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Play the video and update the volume information.
-
 document.addEventListener('DOMContentLoaded', function () {
 	const video = document.getElementById('player1');
 	const playButton = document.getElementById('play');
 	const volumeDisplay = document.getElementById('volume');
-	const volumeSlider = document.getElementById('slider');
 
 	playButton.addEventListener('click', function () {
 		if (video.paused) {
 			video.play();
 			playButton.textContent = 'Pause Video';
+			volumeDisplay.textContent = (video.volume * 100).toFixed(0) + '%';
 		} else {
 			video.pause();
 			playButton.textContent = 'Play Video';
 		}
 	});
 
+	const volumeSlider = document.getElementById('slider');
 	volumeSlider.addEventListener('input', function () {
 		const volume = volumeSlider.value;
 		video.volume = volume / 100;
-		volumeDisplay.textContent = volume;
+		volumeDisplay.textContent = volume + '%';
 	});
 });
 
